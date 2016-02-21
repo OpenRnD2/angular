@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html ng-app="sampleApp" ng-controller="FormController as controller">
+<head>
+    <meta charset="utf-8" />
+    <title>Original vanilla AngularJS form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-messages.min.js"></script>
+    <script src="FormController.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+</head>
+<body class="container">
+    <h2>Form</h2>
+    <form name="controller.sampleForm" ng-submit="controller.submit()" novalidate>
+        <div class="form-group" ng-class="{ 'has-success': controller.sampleForm.$submitted && controller.sampleForm.firstName.$valid, 'has-error': controller.sampleForm.$submitted && controller.sampleForm.firstName.$invalid }">
+            <label class="control-label" for="firstName">First name: </label>
+            <input id="firstName" name="firstName" type="text"
+                   ng-model="controller.entity.firstName" required ng-minlength="2" ng-maxlength="25" ng-pattern="'[^0-9]*'"
+                   class="form-control" style="max-width: 300px;" />
+            <span class="help-block">*</span>
+            <ng-messages for="controller.sampleForm.firstName.$error" role="alert" ng-if="controller.sampleForm.$submitted" class="help-block">
+                <ng-message when="required">Required.</ng-message>
+                <ng-message when="minlength">Too short.</ng-message>
+                <ng-message when="maxlength">Too long.</ng-message>
+                <ng-message when="pattern">No numbers.</ng-message>
+            </ng-messages>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': controller.sampleForm.$submitted && controller.sampleForm.lastName.$valid, 'has-error': controller.sampleForm.$submitted && controller.sampleForm.lastName.$invalid }">
+            <label class="control-label" for="lastName">Last name: </label>
+            <input id="lastName" name="lastName" type="text"
+                   ng-model="controller.entity.lastName" required ng-minlength="2" ng-maxlength="25" ng-pattern="'[^0-9]*'"
+                   class="form-control" style="max-width: 300px;" />
+            <span class="help-block">*</span>
+            <ng-messages for="controller.sampleForm.lastName.$error" role="alert" ng-if="controller.sampleForm.$submitted" class="help-block">
+                <ng-message when="required">Required.</ng-message>
+                <ng-message when="minlength">Too short.</ng-message>
+                <ng-message when="maxlength">Too long.</ng-message>
+                <ng-message when="pattern">No numbers.</ng-message>
+            </ng-messages>
+        </div>
+        <div class="checkbox" ng-class="{ 'has-success': controller.sampleForm.$submitted && controller.sampleForm.checked.$valid, 'has-error': controller.sampleForm.$submitted && controller.sampleForm.checked.$invalid }">
+            <label>
+                <input id="checked" name="checked" type="checkbox"
+                       ng-model="controller.entity.checked" required> Check me out
+            </label>
+            <ng-messages for="controller.sampleForm.checked.$error" role="alert" ng-if="controller.sampleForm.$submitted" class="help-block">
+                <ng-message when="required">Required.</ng-message>
+            </ng-messages>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-xs-6">
+            <h2>Entity</h2>
+            <pre>
+{{ controller.entity | json }}
+            </pre>
+        </div>
+        <div class="col-xs-6">
+            <h2>Form</h2>
+            <pre>
+{{ controller.sampleForm | json }}
+            </pre>
+        </div>
+    </div>
+</body>
+</html>
