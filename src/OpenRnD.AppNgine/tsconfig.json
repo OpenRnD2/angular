@@ -8,6 +8,7 @@
   "exclude": [
     "node_modules",
     "wwwroot",
+    "out",
     "typings/main",
     "typings/main.d.ts"
   ]
