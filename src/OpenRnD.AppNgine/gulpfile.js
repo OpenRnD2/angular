@@ -7,16 +7,19 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 
+var debugFileName = 'appngine.debug.js';
+var releaseFileName = 'appngine.js'
+
 var debugProject = typescript.createProject('tsconfig.json', {
     removeComments: true,
     sortOutput: true,
-    outFile: 'out.debug.js'
+    outFile: debugFileName
 });
 
 var releaseProject = typescript.createProject('tsconfig.json', {
     removeComments: true,
     sortOutput: true,
-    outFile: 'out.release.js'
+    outFile: releaseFileName
 });
 
 var debugOut = 'out/debug';
@@ -31,12 +34,12 @@ gulp.task('scripts', function () {
         .pipe(typescript(releaseProject));
 
     debugResults.js
-        .pipe(concat('out.debug.js'))
+        .pipe(concat(debugFileName))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(debugOut));
 
     releaseResults.js
-        .pipe(concat('out.release.js'))
+        .pipe(concat(releaseFileName))
         .pipe(gulp.dest(releaseOut))
         .pipe(uglify())
         .pipe(rename({ suffix: '.min' }))
