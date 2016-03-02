@@ -3,8 +3,7 @@
 	"name": "ASP.NET",
   "private": true,
   "scripts": {
-    "postinstall": "typings",
-    "typings": "typings"
+    "postinstall": "typings install"
   },
   "devDependencies": {
     "typings": "^0.6.8"
